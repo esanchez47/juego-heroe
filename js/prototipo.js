@@ -93,20 +93,25 @@ deportista4.otraEspecialidad();
 deportista5.otraEspecialidad();
 
 
-/* crear una clase de Monstruo que tenga como parámetros, salud, poder de ataque y raza.
+/* 
+
+// crear una clase de Monstruo que tenga como parámetros, salud, poder de ataque y raza.
+
 Crear un método de prototipo que reciba una instancia de Heroe y que este método 
 le descuente la energia al heroe.
 
-Si la energia del heroe llega por debajo de 0, debe indicar que el heroe se murió.
+// Si la energia del heroe llega por debajo de 0, debe indicar que el heroe se murió.
 
-Crear una clase de Heroe que tenga como parámetros salud poder de ataque y raza.
-Crear un metodo de prototipo que reciba una instancia de Monstruo y que este metodo
+// Crear una clase de Heroe que tenga como parámetros salud poder de ataque y raza.
+
+// Crear un metodo de prototipo que reciba una instancia de Monstruo y que este metodo
 le descuente energia al monstruo.
 
-Si la energia el monstruo llega por debajo de 0, debe indicar que el heroe mató
+// Si la energia el monstruo llega por debajo de 0, debe indicar que el heroe mató
 al monstruo.
 
-A la clase de Heroe, agregar la propiedad de experiencia.
+// A la clase de Heroe, agregar la propiedad de experiencia.
+
 Cada vez que el heroe mate a un monstruo, debe aumentar su experiencia. Si la experiencia
 que tiene el heroe es mayor que un múltiplo de 1000, el heroe debe subir de nivel y multiplicar
 su ataque y salud por el nivel del heroe.
@@ -114,7 +119,66 @@ su ataque y salud por el nivel del heroe.
 Crear otro metodo de prototipo que reciba un una instancia de la clase poción y esta
 aumente la cantidad de salud del heroe.
 
-Crear una clase Poción que reciba como parametro la cantidad de energia que recupera.
+// Crear una clase Poción que reciba como parametro la cantidad de energia que recupera.
 
 */
+
+function Monstruo(saludM, araqueM, razaM){
+	this.saludM = saludM;
+	this.ataqueM = ataqueM;
+	this.razaM = razaM;
+}
+
+function Heroe(saludH, ataqueH, razaH){
+	this.saludH = saludH;
+	this.ataqueH = ataqueH;
+	this.razaH = razaH;
+	this.exp = exp;
+}
+
+Monstruo.prototype.danoMonstruo = function(){
+	this.danoMonstruo = this.ataqueM;
+	if(this.saludH == 0){
+		console.log('El monstruo derrotó al heroe!');
+	}
+	
+	else{
+		console.log('El monstruo inflingió ' + this.ataqueM + ' al heroe.');
+	}
+
+}
+
+Heroe.prototype.hitHeroe = function(){
+	this.hitHeroe = this.ataqueH;
+
+	if(this.saludM == 0){
+		console.log('El heroe derrotó al monstruo!');
+	}
+
+	else{
+		console.log('El heroe inflingió ' + this.ataqueH + ' al monstruo.');
+		
+	}
+
+}
+
+Heroe.prototype.nivelUp = function (){
+	
+}
+
+
+function Pocion(){
+	this.heal = heal;
+}
+
+Pocion.prototype.curar = function(){
+	this.saludH = this.saludH + this.heal;
+	console.log("La salud del heroe ha aumentado en :" + this.saludH)
+}
+
+var heroe1 = new Heroe();
+var pocion1 = new Pocion();
+
+
+
 
