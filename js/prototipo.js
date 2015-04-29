@@ -1,184 +1,79 @@
-// function Chat(mensaje){
-// 	this.mensaje = mensaje;
-// 	// this.guardar = function(){
-// 	// 	console.log('Metodo clase'); // aqui se definio. Si no estuviera aqui, se buscaria el metodo guardar en prototype
-// 	}
 
 
-// Chat.prototype.guardar = function(){
-// 	// console.log('Metodo prototype');
-// 	// chat.__proto__.guardar(); // algunos navegadores no lo leen, por eso se usa esa instancia
-// 	// chat.prototype.guardar(); 
-
-// 	// aqui me conecto con el servidor y le entrego this.
-	
-// 	console.log("guardando", this);
-// }
-
-// var chat = new Chat('Hola Mundo');
-// chat.guardar(); // va a correr el definido en la clase (POR ESO, ESTA DEFINIDO) 
-// 				// Si no estuviera, correría el prototype.
-
-// var chat2 = new Chat('Hola denuevo');
-// chat2.guardar();
-
-/* crear una clase Humano, debe tener como propiedad a que velocidad corre
-(lento, normal o rapido).
-crear un metodo de prototipo que muestre a que velocidad corre.
-generar tres instancias que reciban como parámetros la velocidad a la que corre.
-
-luego mostrar a que velocidad corre cada instancia. */
-
-
-					// function Humano(velocidad){
-					// 	this.velocidad = velocidad;
-					// }
-
-					// Humano.prototype.mostrarVelocidad = function (){
-					// 	console.log(this.velocidad);
-					// }
-
-
-					// var humano1 = new Humano('lento');
-
-					// var humano2 = new Humano('normal');
-
-					// var humano3 = new Humano('rápido');
-
-					// humano1.mostrarVelocidad();
-					// humano2.mostrarVelocidad();
-					// humano3.mostrarVelocidad();
-
-
-// crear una clase deportista que reciba como parámetro su especialidad
-// salto con garrocha, maratonista, levantador de pesas, etc.
-// crear un metodo de prototipo que imprima "El deportista 
-// está haciendo la especialidad de :"nombre especialidad".
-// crear otro metodo de prototipo que reciba otra especialidad y que intente
-// realizarla. Si es la misma especialidad que realiza, realizar la especialidad,
-// si no, indicar una alerta y realizar la especialidad de todos modos.
-
-
-function Deportista(especialidad){
-	this.especialidad = especialidad;
+function Monstruo(salud, ataque, raza){
+	this.salud = salud;
+	this.ataque = ataque;
+	this.raza = raza;
 }
 
-Deportista.prototype.mostrarEspecialidad = function(){
-	console.log("El deportista está haciendo la especialidad de" + ' ' + this.especialidad);
-	// creado el metodo de prototipo que imprime la frase + especialidad.
+Monstruo.prototype.ataca = function(heroe){ // se le pasa la instancia de heroe
+	heroe.salud = heroe.salud - this.ataque;
+	if (heroe.salud <= 0){
+		console.log('El heroe murió!');
+	};
 }
 
-Deportista.prototype.otraEspecialidad = function(especialiad2){
-	this.especialidad2 = 'Tenista';
-	if (this.especialidad2 == this.especialidad){
-		console.log('Realizo mi especialidad: ' + this.especialidad)
-	}
-
-	else{
-		alert('No es mi especialidad, pero la realizo de todos modos.')
-	}
+function Heroe(salud, ataque, raza){
+	this.salud = salud;
+	this.ataque = ataque;
+	this.raza = raza;
+	this.experiencia = 0;
+	this.nivel = 1;
 }
 
-var deportista1 = new Deportista('Maratonista');
-var deportista2 = new Deportista('Ciclicta');
-var deportista3 = new Deportista('Futbolista');
-var deportista4 = new Deportista('Futbolista');
-var deportista5 = new Deportista('Tenista');
+Heroe.prototype.ataca = function (monstruo){
+	monstruo.salud = monstruo.salud - this.ataque;
+	if (monstruo.salud <= 0){
+		console.log('El Heroe mató al monstruo!');
+		this.experiencia += 500;
 
-
-deportista1.mostrarEspecialidad();
-deportista2.mostrarEspecialidad();
-deportista3.mostrarEspecialidad();
-deportista4.otraEspecialidad();
-deportista5.otraEspecialidad();
-
-
-/* 
-
-// crear una clase de Monstruo que tenga como parámetros, salud, poder de ataque y raza.
-
-Crear un método de prototipo que reciba una instancia de Heroe y que este método 
-le descuente la energia al heroe.
-
-// Si la energia del heroe llega por debajo de 0, debe indicar que el heroe se murió.
-
-// Crear una clase de Heroe que tenga como parámetros salud poder de ataque y raza.
-
-// Crear un metodo de prototipo que reciba una instancia de Monstruo y que este metodo
-le descuente energia al monstruo.
-
-// Si la energia el monstruo llega por debajo de 0, debe indicar que el heroe mató
-al monstruo.
-
-// A la clase de Heroe, agregar la propiedad de experiencia.
-
-Cada vez que el heroe mate a un monstruo, debe aumentar su experiencia. Si la experiencia
-que tiene el heroe es mayor que un múltiplo de 1000, el heroe debe subir de nivel y multiplicar
-su ataque y salud por el nivel del heroe.
-
-Crear otro metodo de prototipo que reciba un una instancia de la clase poción y esta
-aumente la cantidad de salud del heroe.
-
-// Crear una clase Poción que reciba como parametro la cantidad de energia que recupera.
-
-*/
-
-function Monstruo(saludM, araqueM, razaM){
-	this.saludM = saludM;
-	this.ataqueM = ataqueM;
-	this.razaM = razaM;
+		if (this.experiencia >= 1000){
+			this.nivel = this.nivel + 1; // sube nivel
+			this.experiencia = this.experiencia - 1000; // al subir den ivel, su exp baja 1000, es decir, vuelve a 0
+			this.nivelUp();
+		}
+	};
 }
-
-function Heroe(saludH, ataqueH, razaH){
-	this.saludH = saludH;
-	this.ataqueH = ataqueH;
-	this.razaH = razaH;
-	this.exp = exp;
-}
-
-Monstruo.prototype.danoMonstruo = function(){
-	this.danoMonstruo = this.ataqueM;
-	if(this.saludH == 0){
-		console.log('El monstruo derrotó al heroe!');
-	}
-	
-	else{
-		console.log('El monstruo inflingió ' + this.ataqueM + ' al heroe.');
-	}
-
-}
-
-Heroe.prototype.hitHeroe = function(){
-	this.hitHeroe = this.ataqueH;
-
-	if(this.saludM == 0){
-		console.log('El heroe derrotó al monstruo!');
-	}
-
-	else{
-		console.log('El heroe inflingió ' + this.ataqueH + ' al monstruo.');
-		
-	}
-
-}
-
-Heroe.prototype.nivelUp = function (){
-	
-}
-
 
 function Pocion(){
-	this.heal = heal;
+	this.recupera = recupera;
 }
 
-Pocion.prototype.curar = function(){
-	this.saludH = this.saludH + this.heal;
-	console.log("La salud del heroe ha aumentado en :" + this.saludH)
+Heroe.prototype.saludUp = function(pocion){
+	this.salud = this.salud + pocion.recupera;
 }
 
-var heroe1 = new Heroe();
-var pocion1 = new Pocion();
+Heroe.prototype.nivelUp = function(){
+	this.ataque = this.ataque * this.nivel;
+	this.salud = 100 * this.nivel;
+}
 
 
+// instancias 
+var monstruo = new Monstruo(100, 5, 'Orco'); // pasar parametros salud, ataque y orco
+var monstruo1 = new Monstruo(100, 5, 'Orco'); // pasar parametros salud, ataque y orco
+var heroe = new Heroe(100, 10, 'Humano');
+
+
+console.log('El monstruo ' + monstruo.raza + ' ha tomado al heroe por sorpresa!')
+monstruo.ataca(heroe);
+
+while (heroe.salud > 0 && monstruo.salud > 0) /* && (monstruo.salud > 0 || monstruo1.salud > 0) hace que el heroe siga peleando aunq haya uno muerto)*/ {
+	monstruo.ataca(heroe);
+	heroe.ataca(monstruo);
+
+	monstruo1.ataca(heroe);
+		if (heroe.salud > 0){
+			heroe.ataca(monstruo);
+		};
+
+		if (heroe.salud < 20){
+			var pocion = new Pocion(30);
+			heroe.saludUp(pocion); //le paso la pocion definida
+		}
+
+}
+
+console.log(heroe);
 
 
